@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\NexenLogo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\NexenLogo.ico" />
+    <None Remove="Resources\NexenLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\NexenLogo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="VisualInspection.UserControls">
+      <HintPath>..\VisualInspection.UserControls.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFUtilsLib">
+      <HintPath>..\WPFUtilsLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\NexenLogo.ico" />
+    <Resource Include="Resources\NexenLogo.png" />
+  </ItemGroup>
+
+</Project>

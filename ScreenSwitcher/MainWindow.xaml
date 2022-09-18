@@ -1,0 +1,269 @@
+﻿<Window x:Class="ScreenSwitcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScreenSwitcher" xmlns:usercontrols="clr-namespace:VisualInspection.UserControls;assembly=VisualInspection.UserControls" xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        Title="NEXEN Tire - Screen Switcher" 
+        Height="440" 
+        Width="570"
+        FontSize="14"
+        Background="#FF444444"
+        Foreground="White"
+        Icon="/Resources/NexenLogo.png" Closing="Window_Closing" Topmost="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer
+            Grid.Row="0"
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Auto">
+            <Grid
+                HorizontalAlignment="Left"
+                Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="0,0,0,15">
+                    <TextBlock
+                        Text="Uspořádání monitorů"/>
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Margin="0,5">
+                        <usercontrols:NumberBox
+                            x:Name="monitor1"
+                            HorizontalContentAlignment="Center"
+                            ButtonsVisible="False"
+                            MinValue="0"
+                            MinWidth="30"/>
+                        <usercontrols:NumberBox
+                            x:Name="monitor2"
+                            HorizontalContentAlignment="Center"
+                            ButtonsVisible="False"
+                            Margin="5,0,0,0"
+                            MinValue="0"
+                            MinWidth="30"/>
+                    </StackPanel>
+                </StackPanel>
+                <Grid
+                    Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid
+                        Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel
+                            Grid.Row="0">
+                            <TextBlock
+                                Text="Offset oken"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <usercontrols:NumberBox
+                                    x:Name="tbOffsetLeft"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    ButtonsVisible="False"
+                                    HorizontalContentAlignment="Center"
+                                    Width="30"/>
+                                <usercontrols:NumberBox
+                                    x:Name="tbOffsetTop"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    ButtonsVisible="False"
+                                    HorizontalContentAlignment="Center"
+                                    Width="30"/>
+                                <usercontrols:NumberBox
+                                    x:Name="tbOffsetRight"
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    ButtonsVisible="False"
+                                    HorizontalContentAlignment="Center"
+                                    Width="30"/>
+                                <usercontrols:NumberBox
+                                    x:Name="tbOffsetBottom"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    ButtonsVisible="False"
+                                    HorizontalContentAlignment="Center"
+                                    Width="30"/>
+                                <Border
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Width="192"
+                                    Height="108"
+                                    BorderThickness="1"
+                                    BorderBrush="Black"
+                                    Background="LightGray"
+                                    Margin="5">
+                                    <Border
+                                        VerticalAlignment="Top"
+                                        Height="10"
+                                        BorderThickness="0,0,0,1"
+                                        BorderBrush="Black">
+                                        <Border
+                                            HorizontalAlignment="Right"
+                                            Width="10"
+                                            BorderThickness="1,0,0,0"
+                                            BorderBrush="Black"/>
+                                    </Border>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="1">
+                            <TextBlock
+                                Text="Rozlišení"
+                                Margin="0,10,0,0"/>
+                            <ComboBox
+                                x:Name="cbResolution"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,10"
+                                Width="150"
+                                Foreground="White">
+                                <ComboBoxItem Content="2560x1440"/>
+                                <ComboBoxItem Content="1920x1080"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="2">
+                            <TextBlock
+                                Text="Interval změny"/>
+                            <usercontrols:NumberBox
+                                x:Name="tbInterval"
+                                HorizontalAlignment="Left"
+                                ButtonsVisible="False"
+                                Width="150"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid
+                        Grid.Column="1"
+                        Margin="20,0,0,0"
+                        Width="250">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Text="Aplikace"/>
+                        <Grid
+                            Grid.Row="1"
+                            Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox
+                                x:Name="tbAppName"/>
+                            <Button
+                                x:Name="btnAdd"
+                                Foreground="Green"
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                FontSize="14"
+                                Width="20"
+                                ToolTip="Přidat" Click="btnAdd_Click">
+                                <Button.Content>
+                                    <fa:FontAwesome
+                                        Icon="Plus"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                        <ListView 
+                            Style="{DynamicResource ListViewStyle1}"
+                            x:Name="lvApps"
+                            Grid.Row="2"
+                            Height="200">
+                        </ListView>
+                        <Button
+                            Grid.Row="3"
+                            x:Name="btnRemove"
+                            Foreground="Red"
+                            HorizontalAlignment="Right"
+                            FontWeight="Bold"
+                            Margin="0,5"
+                            FontSize="14"
+                            Width="20" Click="btnRemove_Click">
+                            <Button.Content>
+                                <fa:FontAwesome
+                                    Icon="Minus"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal">
+            <Button
+                Style="{DynamicResource ApplySettingsButtonStyle}"
+                Grid.Row="3"
+                Margin="5,15,0,5"
+                Content="Apply"
+                HorizontalAlignment="Left"
+                Width="150"
+                FontSize="18"
+                x:Name="btnApply" Click="btnApply_Click"/>
+            <Button
+                Style="{DynamicResource ApplySettingsButtonStyle}"
+                Grid.Row="3"
+                Margin="5,15,0,5"
+                Content="Start"
+                HorizontalAlignment="Right"
+                Width="150"
+                FontSize="18"
+                x:Name="btnStart" Click="btnStart_Click"/>
+            <Button
+                Style="{DynamicResource ApplySettingsButtonStyle}"
+                Grid.Row="3"
+                Margin="5,15,0,5"
+                Content="Stop"
+                HorizontalAlignment="Right"
+                Width="150"
+                FontSize="18"
+                x:Name="btnStop" Click="btnStop_Click"/>
+            <Button
+                Style="{DynamicResource ApplySettingsButtonStyle}"
+                Grid.Row="3"
+                Margin="5,15,0,5"
+                Content="test"
+                Width="98"
+                FontSize="18"
+                x:Name="btntest" Click="btntest_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,19 @@
+﻿<Application x:Class="ScreenSwitcher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ScreenSwitcher"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/PurpleDark/WindowsDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/PurpleDark/TabControlsDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/PurpleDark/ButtonsDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/PurpleDark/ScrollViewersDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/PurpleDark/TextBoxesDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/PurpleDark/ComboBoxesDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/PurpleDark/ListViewsDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
