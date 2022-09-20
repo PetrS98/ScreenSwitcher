@@ -1,22 +1,10 @@
 ﻿using ScreenSwitcher.Classes;
 using ScreenSwitcher.JDOs;
-using System;
+using ScreenSwitcher.UDTs;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ScreenSwitcher
 {
@@ -28,13 +16,12 @@ namespace ScreenSwitcher
         private const string ENCRYPTION_KEY = "eoW890%@";
         private const string SETTING_FILE_PATH = "settings.json";
 
-        private SettingsJDO Settings = new SettingsJDO();
-
-        private JsonHandler JsonHandler = new JsonHandler();
+        private SettingsJDO Settings = new();
+        
+        private JsonHandler JsonHandler = new();
         private WindowSwitchHandler WindowSwitchHandler;
 
-        private int AppIndex = 0;
-        AppWindowHandler ggg = new AppWindowHandler();
+        List<DataGridApplicationUDT> DataGridApplicationItems;
 
         public MainWindow()
         {
@@ -44,9 +31,12 @@ namespace ScreenSwitcher
             object? data = JsonHandler.ReadJSONData(SETTING_FILE_PATH, ENCRYPTION_KEY);
             if (data != null) Settings = (SettingsJDO)data;
 
-            MoveSettingsToControls(Settings);
-
             WindowSwitchHandler = new WindowSwitchHandler(Settings);
+
+            DataGridApplicationItems = new List<DataGridApplicationUDT>();
+            dgApplication.ItemsSource = DataGridApplicationItems;
+
+            MoveSettingsToControls(Settings);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -56,17 +46,17 @@ namespace ScreenSwitcher
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbAppName.Text)) return;
+            //if (string.IsNullOrWhiteSpace(tbAppName.Text)) return;
 
-            lvApps.Items.Add(tbAppName.Text);
-            tbAppName.Clear();
+            //lvApps.Items.Add(tbAppName.Text);
+            //tbAppName.Clear();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace((string)lvApps.SelectedItem)) return;
+            //if(string.IsNullOrWhiteSpace((string)lvApps.SelectedItem)) return;
 
-            lvApps.Items.Remove(lvApps.SelectedItem);
+            //lvApps.Items.Remove(lvApps.SelectedItem);
         }
 
         private void btnApply_Click(object sender, RoutedEventArgs e)
@@ -86,26 +76,19 @@ namespace ScreenSwitcher
             SetControlsState(true);
         }
 
-        private void MoveSettingsToControls(SettingsJDO settings)
+        private void btnManualSwitch_Click(object sender, RoutedEventArgs e)
         {
-            monitor1.Value = settings.MonitorsOrder[0];
-            monitor2.Value = settings.MonitorsOrder[1];
+            WindowSwitchHandler.SwitchScreen();
+        }
 
-            tbOffsetTop.Value = settings.WindowOffset[0];
-            tbOffsetLeft.Value = settings.WindowOffset[1];
-            tbOffsetBottom.Value = settings.WindowOffset[2];
-            tbOffsetRight.Value = settings.WindowOffset[3];
+        private void dgApplication_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            MoveControlsToSettings();
+        }
 
-            cbResolution.SelectedIndex = settings.MonitorResolutionIndex;
-
-            tbInterval.Value = Settings.ChangeInterval;
-
-            lvApps.Items.Clear();
-
-            foreach (string app in settings.ApplicationName)
-            {
-                lvApps.Items.Add(app);
-            }
+        private void dgApplication_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete) MoveControlsToSettings();
         }
 
         private void MoveControlsToSettings()
@@ -113,33 +96,36 @@ namespace ScreenSwitcher
             Settings.MonitorsOrder[0] = (short)monitor1.Value;
             Settings.MonitorsOrder[1] = (short)monitor2.Value;
 
-            Settings.WindowOffset[0] = (short)tbOffsetTop.Value;
-            Settings.WindowOffset[1] = (short)tbOffsetLeft.Value;
-            Settings.WindowOffset[2] = (short)tbOffsetBottom.Value;
-            Settings.WindowOffset[3] = (short)tbOffsetRight.Value;
-
             Settings.MonitorResolutionIndex = cbResolution.SelectedIndex;
             Settings.MonitorResolution = (string)cbResolution.SelectionBoxItem;
 
             Settings.ChangeInterval = tbInterval.Value;
 
-            Settings.ApplicationName.Clear();
+            Settings.ApplicationInformation = DataGridApplicationItems;
+        }
 
-            foreach (string app in lvApps.Items)
+        private void MoveSettingsToControls(SettingsJDO settings)
+        {
+            monitor1.Value = settings.MonitorsOrder[0];
+            monitor2.Value = settings.MonitorsOrder[1];
+
+            cbResolution.SelectedIndex = settings.MonitorResolutionIndex;
+
+            tbInterval.Value = Settings.ChangeInterval;
+
+            foreach (var Information in settings.ApplicationInformation)
             {
-                Settings.ApplicationName.Add(app);
+                DataGridApplicationItems.Add(Information);
             }
+
+            dgApplication.Items.Refresh();
+
         }
 
         private void SetControlsState(bool Enable)
         {
             monitor1.IsEnabled = Enable;
             monitor2.IsEnabled = Enable;
-
-            tbOffsetTop.IsEnabled = Enable;
-            tbOffsetLeft.IsEnabled = Enable;
-            tbOffsetBottom.IsEnabled = Enable;
-            tbOffsetRight.IsEnabled = Enable;
 
             cbResolution.IsEnabled = Enable;
 
@@ -149,21 +135,9 @@ namespace ScreenSwitcher
             btnStart.IsEnabled = Enable;
             btnStop.IsEnabled = !Enable;
 
-            tbAppName.IsEnabled = Enable;
-            btnAdd.IsEnabled = Enable;
-            btnRemove.IsEnabled = Enable;
-        }
+            btnManualSwitch.IsEnabled = Enable;
 
-        private void btntest_Click(object sender, RoutedEventArgs e)
-        {
-            if (Settings.ApplicationName.Count == 0 || Settings is null) return;
-            Debug.WriteLine("Monitor 1: " + AppIndex);
-            ggg.SetWindowPosition(1, Settings.ApplicationName[AppIndex], Settings.MonitorResolution, Settings.MonitorsOrder, Settings.WindowOffset);
-            AppIndex = (AppIndex + 1) % Settings.ApplicationName.Count;
-            //Thread.Sleep(500);
-
-            Debug.WriteLine("Monitor 2: " + AppIndex);
-            ggg.SetWindowPosition(2, Settings.ApplicationName[AppIndex], Settings.MonitorResolution, Settings.MonitorsOrder, Settings.WindowOffset);
+            dgApplication.IsEnabled = Enable;
         }
     }
 }

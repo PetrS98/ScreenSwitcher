@@ -6,32 +6,38 @@
         xmlns:local="clr-namespace:ScreenSwitcher" xmlns:usercontrols="clr-namespace:VisualInspection.UserControls;assembly=VisualInspection.UserControls" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="NEXEN Tire - Screen Switcher" 
-        Height="440" 
-        Width="570"
+        Height="400" 
+        Width="800"
         FontSize="14"
         Background="#FF444444"
         Foreground="White"
         Icon="/Resources/NexenLogo.png" Closing="Window_Closing" Topmost="True">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
 
-        <ScrollViewer
+    <ScrollViewer
             Grid.Row="0"
             VerticalScrollBarVisibility="Auto"
-            HorizontalScrollBarVisibility="Auto">
+            HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+
             <Grid
-                HorizontalAlignment="Left"
-                Margin="5">
+            HorizontalAlignment="Left"
+            Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
                 <StackPanel
                     Grid.Row="0"
+                    Grid.Column="0"
                     Margin="0,0,0,15">
                     <TextBlock
                         Text="Uspořádání monitorů"/>
@@ -51,219 +57,116 @@
                             Margin="5,0,0,0"
                             MinValue="0"
                             MinWidth="30"/>
+
                     </StackPanel>
-                </StackPanel>
-                <Grid
-                    Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid
-                        Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel
-                            Grid.Row="0">
-                            <TextBlock
-                                Text="Offset oken"/>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <usercontrols:NumberBox
-                                    x:Name="tbOffsetLeft"
-                                    Grid.Row="1"
-                                    Grid.Column="0"
-                                    VerticalAlignment="Center"
-                                    ButtonsVisible="False"
-                                    HorizontalContentAlignment="Center"
-                                    Width="30"/>
-                                <usercontrols:NumberBox
-                                    x:Name="tbOffsetTop"
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    ButtonsVisible="False"
-                                    HorizontalContentAlignment="Center"
-                                    Width="30"/>
-                                <usercontrols:NumberBox
-                                    x:Name="tbOffsetRight"
-                                    Grid.Row="1"
-                                    Grid.Column="2"
-                                    VerticalAlignment="Center"
-                                    ButtonsVisible="False"
-                                    HorizontalContentAlignment="Center"
-                                    Width="30"/>
-                                <usercontrols:NumberBox
-                                    x:Name="tbOffsetBottom"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    ButtonsVisible="False"
-                                    HorizontalContentAlignment="Center"
-                                    Width="30"/>
-                                <Border
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Width="192"
-                                    Height="108"
-                                    BorderThickness="1"
-                                    BorderBrush="Black"
-                                    Background="LightGray"
-                                    Margin="5">
-                                    <Border
-                                        VerticalAlignment="Top"
-                                        Height="10"
-                                        BorderThickness="0,0,0,1"
-                                        BorderBrush="Black">
-                                        <Border
-                                            HorizontalAlignment="Right"
-                                            Width="10"
-                                            BorderThickness="1,0,0,0"
-                                            BorderBrush="Black"/>
-                                    </Border>
-                                </Border>
-                            </Grid>
-                        </StackPanel>
-                        <StackPanel
-                            Grid.Row="1">
-                            <TextBlock
-                                Text="Rozlišení"
-                                Margin="0,10,0,0"/>
-                            <ComboBox
+                    <TextBlock
+                                Text="Rozlišení Obrazovek"
+                                Margin="5,10,0,0"/>
+                    <ComboBox
                                 x:Name="cbResolution"
                                 HorizontalAlignment="Left"
-                                Margin="0,0,0,10"
-                                Width="150"
-                                Foreground="White">
-                                <ComboBoxItem Content="2560x1440"/>
-                                <ComboBoxItem Content="1920x1080"/>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel
-                            Grid.Row="2">
-                            <TextBlock
-                                Text="Interval změny"/>
-                            <usercontrols:NumberBox
-                                x:Name="tbInterval"
-                                HorizontalAlignment="Left"
-                                ButtonsVisible="False"
-                                Width="150"/>
-                        </StackPanel>
-                    </Grid>
-                    <Grid
-                        Grid.Column="1"
-                        Margin="20,0,0,0"
-                        Width="250">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock
-                            Grid.Row="0"
-                            Text="Aplikace"/>
-                        <Grid
-                            Grid.Row="1"
-                            Margin="0,5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBox
-                                x:Name="tbAppName"/>
-                            <Button
-                                x:Name="btnAdd"
-                                Foreground="Green"
-                                Grid.Column="1"
-                                Margin="5,0,0,0"
-                                FontSize="14"
-                                Width="20"
-                                ToolTip="Přidat" Click="btnAdd_Click">
-                                <Button.Content>
-                                    <fa:FontAwesome
-                                        Icon="Plus"/>
-                                </Button.Content>
-                            </Button>
-                        </Grid>
-                        <ListView 
-                            Style="{DynamicResource ListViewStyle1}"
-                            x:Name="lvApps"
-                            Grid.Row="2"
-                            Height="200">
-                        </ListView>
-                        <Button
+                                Margin="5,0,0,10"
+                                Width="170"
+                                Foreground="White"
+                                MaxDropDownHeight="210">
+                        <ComboBoxItem Content="3840x2160"/>
+                        <ComboBoxItem Content="2560x1440"/>
+                        <ComboBoxItem Content="1920x1080"/>
+                        <ComboBoxItem Content="1680x1050"/>
+                        <ComboBoxItem Content="1600x900"/>
+                        <ComboBoxItem Content="1440x900"/>
+                        <ComboBoxItem Content="1400x1050"/>
+                        <ComboBoxItem Content="1366x768"/>
+                        <ComboBoxItem Content="1360x768"/>
+                        <ComboBoxItem Content="1280x1024"/>
+                        <ComboBoxItem Content="1280x960"/>
+                        <ComboBoxItem Content="1280x800"/>
+                        <ComboBoxItem Content="1280x768"/>
+                        <ComboBoxItem Content="1280x720"/>
+                        <ComboBoxItem Content="1280x600"/>
+                        <ComboBoxItem Content="1152x864"/>
+                        <ComboBoxItem Content="1024x768"/>
+                    </ComboBox>
+                    <TextBlock
+                            Margin="5,0,0,0"
+                            Text="Interval změny"/>
+                    <usercontrols:NumberBox
+                            x:Name="tbInterval"
+                            HorizontalAlignment="Left"
+                            ButtonsVisible="False"
+                            Margin="5,0,0,5"
+                            Width="170"/>
+                    <Button x:Name="btnApply"
+                            Style="{DynamicResource ApplySettingsButtonStyle}"
                             Grid.Row="3"
-                            x:Name="btnRemove"
-                            Foreground="Red"
+                            Margin="5,15,0,5"
+                            Content="Apply Settings"
+                            HorizontalAlignment="Left"
+                            Width="170"
+                            FontSize="18"
+                            Click="btnApply_Click"/>
+                    <Button x:Name="btnStart"
+                            Style="{DynamicResource ApplySettingsButtonStyle}"
+                            Grid.Row="3"
+                            Margin="5,7,0,5"
+                            Content="Start"
                             HorizontalAlignment="Right"
-                            FontWeight="Bold"
-                            Margin="0,5"
-                            FontSize="14"
-                            Width="20" Click="btnRemove_Click">
-                            <Button.Content>
-                                <fa:FontAwesome
-                                    Icon="Minus"/>
-                            </Button.Content>
-                        </Button>
-                    </Grid>
-                </Grid>
+                            Width="170"
+                            FontSize="18"
+                            Click="btnStart_Click"/>
+                    <Button x:Name="btnStop" 
+                            Style="{DynamicResource ApplySettingsButtonStyle}"
+                            Grid.Row="3"
+                            Margin="5,7,0,5"
+                            Content="Stop"
+                            HorizontalAlignment="Right"
+                            Width="170"
+                            FontSize="18"
+                            Click="btnStop_Click"/>
+                    <Button x:Name="btnManualSwitch"
+                            Style="{DynamicResource ApplySettingsButtonStyle}"
+                            Grid.Row="3"
+                            Margin="5,7,0,5"
+                            Content="Manuální Přepnutí"
+                            Width="170"
+                            FontSize="18" Click="btnManualSwitch_Click"/>
+                </StackPanel>
             </Grid>
-        </ScrollViewer>
-        <StackPanel
-            Grid.Row="1"
-            Orientation="Horizontal">
-            <Button
-                Style="{DynamicResource ApplySettingsButtonStyle}"
-                Grid.Row="3"
-                Margin="5,15,0,5"
-                Content="Apply"
-                HorizontalAlignment="Left"
-                Width="150"
-                FontSize="18"
-                x:Name="btnApply" Click="btnApply_Click"/>
-            <Button
-                Style="{DynamicResource ApplySettingsButtonStyle}"
-                Grid.Row="3"
-                Margin="5,15,0,5"
-                Content="Start"
-                HorizontalAlignment="Right"
-                Width="150"
-                FontSize="18"
-                x:Name="btnStart" Click="btnStart_Click"/>
-            <Button
-                Style="{DynamicResource ApplySettingsButtonStyle}"
-                Grid.Row="3"
-                Margin="5,15,0,5"
-                Content="Stop"
-                HorizontalAlignment="Right"
-                Width="150"
-                FontSize="18"
-                x:Name="btnStop" Click="btnStop_Click"/>
-            <Button
-                Style="{DynamicResource ApplySettingsButtonStyle}"
-                Grid.Row="3"
-                Margin="5,15,0,5"
-                Content="test"
-                Width="98"
-                FontSize="18"
-                x:Name="btntest" Click="btntest_Click"/>
-        </StackPanel>
-    </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <TextBlock
+                        Text="Aplikace"
+                        Margin="15,5,0,5"/>
+                    <DataGrid x:Name="dgApplication" ItemsSource="{Binding DataGridApplicationItems}" AutoGenerateColumns="False" HeadersVisibility="Column" Width="auto" Height="287" Margin="15,0,5,0" CellEditEnding="dgApplication_CellEditEnding" PreviewKeyDown="dgApplication_PreviewKeyDown">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="BorderThickness" Value="0,1,1,1"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                            <Style TargetType="{x:Type DataGrid}">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="BorderThickness" Value="1,0,0,0"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Background" Value="Gray"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Název" Binding="{Binding Name}" Width="150"/>
+                            <DataGridTextColumn Header="Top Offset" Binding="{Binding OffsetTop}" Width="85" />
+                            <DataGridTextColumn Header="Left Offset" Binding="{Binding OffsetLeft}" Width="90" />
+                            <DataGridTextColumn Header="Bot Offset" Binding="{Binding OffsetBot}" Width="85" />
+                            <DataGridTextColumn Header="Right Offset" Binding="{Binding OffsetRight}" Width="95" />
+                            <DataGridCheckBoxColumn Header="Použít" Binding="{Binding Used}" Width="70"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Window>

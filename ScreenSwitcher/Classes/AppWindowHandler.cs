@@ -92,8 +92,11 @@ namespace ScreenSwitcher.Classes
                 else _XPos = -(_ResolutionInt[0] + AppOffset[1]);
             }
 
-            _Width = _ResolutionInt[0] + Math.Abs(AppOffset[1]) + Math.Abs(AppOffset[3]);
-            _Height = _ResolutionInt[1] + Math.Abs(AppOffset[0]) + Math.Abs(AppOffset[2]);
+            //_Width = _ResolutionInt[0] + Math.Abs(AppOffset[1]) + Math.Abs(AppOffset[3]);
+            //_Height = _ResolutionInt[1] + Math.Abs(AppOffset[0]) + Math.Abs(AppOffset[2]);
+
+            _Width = _ResolutionInt[0] + (-AppOffset[1]) + AppOffset[3];
+            _Height = _ResolutionInt[1] + (-AppOffset[0]) + AppOffset[2];
 
             WINDOWPLACEMENT WindowPlacement = new WINDOWPLACEMENT();
             _GetWindowPlacement(WindowName, ref WindowPlacement);
