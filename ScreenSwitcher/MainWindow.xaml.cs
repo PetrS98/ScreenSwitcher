@@ -139,5 +139,12 @@ namespace ScreenSwitcher
 
             dgApplication.IsEnabled = Enable;
         }
+
+        private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)sender;
+            scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+            scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
     }
 }

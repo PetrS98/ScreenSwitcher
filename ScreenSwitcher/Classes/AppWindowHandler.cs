@@ -92,9 +92,6 @@ namespace ScreenSwitcher.Classes
                 else _XPos = -(_ResolutionInt[0] + AppOffset[1]);
             }
 
-            //_Width = _ResolutionInt[0] + Math.Abs(AppOffset[1]) + Math.Abs(AppOffset[3]);
-            //_Height = _ResolutionInt[1] + Math.Abs(AppOffset[0]) + Math.Abs(AppOffset[2]);
-
             _Width = _ResolutionInt[0] + (-AppOffset[1]) + AppOffset[3];
             _Height = _ResolutionInt[1] + (-AppOffset[0]) + AppOffset[2];
 
@@ -117,7 +114,6 @@ namespace ScreenSwitcher.Classes
                 IntPtr hWnd = _GetProcessHandler(WindowName);
                 if (!hWnd.Equals(IntPtr.Zero))
                 {
-                    //MoveWindow(hWnd, XPos, YPos, Width, Height, Repaint);
                     SetWindowPos(hWnd, (IntPtr)(-1), XPos, YPos, Width, Height, 0x4000);
                     return true;
                 }

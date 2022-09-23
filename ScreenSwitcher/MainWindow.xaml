@@ -6,166 +6,88 @@
         xmlns:local="clr-namespace:ScreenSwitcher" xmlns:usercontrols="clr-namespace:VisualInspection.UserControls;assembly=VisualInspection.UserControls" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="NEXEN Tire - Screen Switcher" 
-        Height="400" 
-        Width="800"
+        Height="364" 
+        Width="775"
         FontSize="14"
         Background="#FF444444"
         Foreground="White"
         Icon="/Resources/NexenLogo.png" Closing="Window_Closing" Topmost="True">
 
-    <ScrollViewer
-            Grid.Row="0"
-            VerticalScrollBarVisibility="Auto"
-            HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
+    <ScrollViewer Grid.Row="0" Loaded="ScrollViewer_Loaded">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
 
-
-            <Grid
-            HorizontalAlignment="Left"
-            Margin="5">
+            <StackPanel Grid.Column="0" Margin="5,5,0,0">
+                <TextBlock Text="Uspořádání monitorů"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <usercontrols:NumberBox x:Name="monitor1" HorizontalContentAlignment="Center" ButtonsVisible="False" MinValue="0" MinWidth="30"/>
+                    <usercontrols:NumberBox x:Name="monitor2" HorizontalContentAlignment="Center" ButtonsVisible="False" Margin="5,0,0,0" MinValue="0" MinWidth="30"/>
+                </StackPanel>
+                <TextBlock Text="Rozlišení Obrazovek" Margin="0,10,0,0"/>
+                <ComboBox x:Name="cbResolution" Margin="0,0,0,10" Foreground="White" MaxDropDownHeight="210">
+                    <ComboBoxItem Content="3840x2160"/>
+                    <ComboBoxItem Content="2560x1440"/>
+                    <ComboBoxItem Content="1920x1080"/>
+                    <ComboBoxItem Content="1680x1050"/>
+                    <ComboBoxItem Content="1600x900"/>
+                    <ComboBoxItem Content="1440x900"/>
+                    <ComboBoxItem Content="1400x1050"/>
+                    <ComboBoxItem Content="1366x768"/>
+                    <ComboBoxItem Content="1360x768"/>
+                    <ComboBoxItem Content="1280x1024"/>
+                    <ComboBoxItem Content="1280x960"/>
+                    <ComboBoxItem Content="1280x800"/>
+                    <ComboBoxItem Content="1280x768"/>
+                    <ComboBoxItem Content="1280x720"/>
+                    <ComboBoxItem Content="1280x600"/>
+                    <ComboBoxItem Content="1152x864"/>
+                    <ComboBoxItem Content="1024x768"/>
+                </ComboBox>
+                <TextBlock Text="Interval změny"/>
+                <usercontrols:NumberBox x:Name="tbInterval" ButtonsVisible="False" />
+                <Button x:Name="btnApply" Style="{DynamicResource ApplySettingsButtonStyle}" Grid.Row="3" Margin="0,15,0,5" Padding="6,2" Content="Apply Settings" FontSize="18" Click="btnApply_Click"/>
+                <Button x:Name="btnStart" Style="{DynamicResource ApplySettingsButtonStyle}" Grid.Row="3" Margin="0,7,0,5" Padding="6,2" Content="Start" FontSize="18" Click="btnStart_Click"/>
+                <Button x:Name="btnStop" Style="{DynamicResource ApplySettingsButtonStyle}" Grid.Row="3" Margin="0,7,0,5" Padding="6,2" Content="Stop" FontSize="18" Click="btnStop_Click"/>
+                <Button x:Name="btnManualSwitch" Style="{DynamicResource ApplySettingsButtonStyle}" Grid.Row="3" Margin="0,7,0,5" Padding="6,2" Content="Manuální Přepnutí" FontSize="18" Click="btnManualSwitch_Click"/>
+            </StackPanel>
+            <Grid Grid.Column="1" Margin="15,5,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="0,0,0,15">
-                    <TextBlock
-                        Text="Uspořádání monitorů"/>
-                    <StackPanel
-                        Orientation="Horizontal"
-                        Margin="0,5">
-                        <usercontrols:NumberBox
-                            x:Name="monitor1"
-                            HorizontalContentAlignment="Center"
-                            ButtonsVisible="False"
-                            MinValue="0"
-                            MinWidth="30"/>
-                        <usercontrols:NumberBox
-                            x:Name="monitor2"
-                            HorizontalContentAlignment="Center"
-                            ButtonsVisible="False"
-                            Margin="5,0,0,0"
-                            MinValue="0"
-                            MinWidth="30"/>
 
-                    </StackPanel>
-                    <TextBlock
-                                Text="Rozlišení Obrazovek"
-                                Margin="5,10,0,0"/>
-                    <ComboBox
-                                x:Name="cbResolution"
-                                HorizontalAlignment="Left"
-                                Margin="5,0,0,10"
-                                Width="170"
-                                Foreground="White"
-                                MaxDropDownHeight="210">
-                        <ComboBoxItem Content="3840x2160"/>
-                        <ComboBoxItem Content="2560x1440"/>
-                        <ComboBoxItem Content="1920x1080"/>
-                        <ComboBoxItem Content="1680x1050"/>
-                        <ComboBoxItem Content="1600x900"/>
-                        <ComboBoxItem Content="1440x900"/>
-                        <ComboBoxItem Content="1400x1050"/>
-                        <ComboBoxItem Content="1366x768"/>
-                        <ComboBoxItem Content="1360x768"/>
-                        <ComboBoxItem Content="1280x1024"/>
-                        <ComboBoxItem Content="1280x960"/>
-                        <ComboBoxItem Content="1280x800"/>
-                        <ComboBoxItem Content="1280x768"/>
-                        <ComboBoxItem Content="1280x720"/>
-                        <ComboBoxItem Content="1280x600"/>
-                        <ComboBoxItem Content="1152x864"/>
-                        <ComboBoxItem Content="1024x768"/>
-                    </ComboBox>
-                    <TextBlock
-                            Margin="5,0,0,0"
-                            Text="Interval změny"/>
-                    <usercontrols:NumberBox
-                            x:Name="tbInterval"
-                            HorizontalAlignment="Left"
-                            ButtonsVisible="False"
-                            Margin="5,0,0,5"
-                            Width="170"/>
-                    <Button x:Name="btnApply"
-                            Style="{DynamicResource ApplySettingsButtonStyle}"
-                            Grid.Row="3"
-                            Margin="5,15,0,5"
-                            Content="Apply Settings"
-                            HorizontalAlignment="Left"
-                            Width="170"
-                            FontSize="18"
-                            Click="btnApply_Click"/>
-                    <Button x:Name="btnStart"
-                            Style="{DynamicResource ApplySettingsButtonStyle}"
-                            Grid.Row="3"
-                            Margin="5,7,0,5"
-                            Content="Start"
-                            HorizontalAlignment="Right"
-                            Width="170"
-                            FontSize="18"
-                            Click="btnStart_Click"/>
-                    <Button x:Name="btnStop" 
-                            Style="{DynamicResource ApplySettingsButtonStyle}"
-                            Grid.Row="3"
-                            Margin="5,7,0,5"
-                            Content="Stop"
-                            HorizontalAlignment="Right"
-                            Width="170"
-                            FontSize="18"
-                            Click="btnStop_Click"/>
-                    <Button x:Name="btnManualSwitch"
-                            Style="{DynamicResource ApplySettingsButtonStyle}"
-                            Grid.Row="3"
-                            Margin="5,7,0,5"
-                            Content="Manuální Přepnutí"
-                            Width="170"
-                            FontSize="18" Click="btnManualSwitch_Click"/>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Column="1">
-                <StackPanel>
-                    <TextBlock
-                        Text="Aplikace"
-                        Margin="15,5,0,5"/>
-                    <DataGrid x:Name="dgApplication" ItemsSource="{Binding DataGridApplicationItems}" AutoGenerateColumns="False" HeadersVisibility="Column" Width="auto" Height="287" Margin="15,0,5,0" CellEditEnding="dgApplication_CellEditEnding" PreviewKeyDown="dgApplication_PreviewKeyDown">
-                        <DataGrid.Resources>
-                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background" Value="Gray"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                                <Setter Property="FontSize" Value="15"/>
-                                <Setter Property="BorderThickness" Value="0,1,1,1"/>
-                                <Setter Property="BorderBrush" Value="Black"/>
-                            </Style>
-                            <Style TargetType="{x:Type DataGrid}">
-                                <Setter Property="Background" Value="Gray"/>
-                                <Setter Property="BorderThickness" Value="1,0,0,0"/>
-                                <Setter Property="BorderBrush" Value="Black"/>
-                            </Style>
-                            <Style TargetType="{x:Type DataGridRow}">
-                                <Setter Property="Background" Value="Gray"/>
-                            </Style>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Název" Binding="{Binding Name}" Width="150"/>
-                            <DataGridTextColumn Header="Top Offset" Binding="{Binding OffsetTop}" Width="85" />
-                            <DataGridTextColumn Header="Left Offset" Binding="{Binding OffsetLeft}" Width="90" />
-                            <DataGridTextColumn Header="Bot Offset" Binding="{Binding OffsetBot}" Width="85" />
-                            <DataGridTextColumn Header="Right Offset" Binding="{Binding OffsetRight}" Width="95" />
-                            <DataGridCheckBoxColumn Header="Použít" Binding="{Binding Used}" Width="70"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
+                <TextBlock Text="Aplikace"/>
+                <DataGrid x:Name="dgApplication" Grid.Row="1" ItemsSource="{Binding DataGridApplicationItems}" AutoGenerateColumns="False" HeadersVisibility="Column" VerticalAlignment="Top" Width="auto" Height="295" CellEditEnding="dgApplication_CellEditEnding" PreviewKeyDown="dgApplication_PreviewKeyDown">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="Gray"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="BorderThickness" Value="0,1,1,1"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGrid}">
+                            <Setter Property="Background" Value="Gray"/>
+                            <Setter Property="BorderThickness" Value="1,0,0,0"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="Background" Value="Gray"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Název" Binding="{Binding Name}" Width="150"/>
+                        <DataGridTextColumn Header="Top Offset" Binding="{Binding OffsetTop}" Width="85" />
+                        <DataGridTextColumn Header="Left Offset" Binding="{Binding OffsetLeft}" Width="90" />
+                        <DataGridTextColumn Header="Bot Offset" Binding="{Binding OffsetBot}" Width="85" />
+                        <DataGridTextColumn Header="Right Offset" Binding="{Binding OffsetRight}" Width="95" />
+                        <DataGridCheckBoxColumn Header="Použít" Binding="{Binding Used}" Width="70"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
     </ScrollViewer>

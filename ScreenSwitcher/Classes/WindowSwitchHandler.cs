@@ -59,8 +59,6 @@ namespace ScreenSwitcher.Classes
 
             short[] WindowOffsets = new short[4]; 
 
-            Debug.WriteLine("Monitor 1: " + AppIndex);
-
             WindowOffsets[0] = (short)EnabledApps[AppIndex].OffsetTop!;
             WindowOffsets[1] = (short)EnabledApps[AppIndex].OffsetLeft!;
             WindowOffsets[2] = (short)EnabledApps[AppIndex].OffsetBot!;
@@ -69,8 +67,6 @@ namespace ScreenSwitcher.Classes
             _appWindowHandler.SetWindowPosition(1, EnabledApps[AppIndex].Name!, _settings.MonitorResolution, _settings.MonitorsOrder, WindowOffsets);
 
             AppIndex = (AppIndex + 1) % EnabledApps.Count;
-
-            Debug.WriteLine("Monitor 2: " + AppIndex);
 
             WindowOffsets[0] = (short)EnabledApps[AppIndex].OffsetTop!;
             WindowOffsets[1] = (short)EnabledApps[AppIndex].OffsetLeft!;
